@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Brain } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <Brain className="h-8 w-8 text-primary-600" />
+              <img src="/Ressources/ADHD-Time.png" alt="ADHD-Time Logo" className="h-10 w-auto" />
               <span className="ml-2 text-xl font-semibold text-neutral-900">ADHDTime</span>
             </Link>
           </div>

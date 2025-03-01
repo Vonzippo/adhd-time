@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <defs>
               <radialGradient id="gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop offset="0%" stopColor="rgba(139, 92, 246, 0.3)" />
+                <stop offset="0%" stopColor="rgba(252, 60, 72, 0.3)" />
                 <stop offset="100%" stopColor="rgba(249, 115, 22, 0.1)" />
               </radialGradient>
             </defs>
@@ -63,7 +63,7 @@ const HomePage: React.FC = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-              <BookOpen className="text-primary-600 h-6 w-6" />
+              <BookOpen className="text-primary-500 h-6 w-6" />
             </div>
             <h3 className="text-xl font-semibold mb-3">ADHD Basics</h3>
             <p className="text-neutral-600 mb-4">
@@ -80,7 +80,7 @@ const HomePage: React.FC = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-              <Brain className="text-primary-600 h-6 w-6" />
+              <Brain className="text-primary-500 h-6 w-6" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Interactive Learning</h3>
             <p className="text-neutral-600 mb-4">
@@ -97,7 +97,7 @@ const HomePage: React.FC = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="rounded-full bg-primary-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
-              <Clock className="text-primary-600 h-6 w-6" />
+              <Clock className="text-primary-500 h-6 w-6" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Practical Tools</h3>
             <p className="text-neutral-600 mb-4">
