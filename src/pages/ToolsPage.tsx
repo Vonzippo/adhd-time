@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Clock, CheckSquare, Bell, ArrowRight, Play, Pause, RefreshCw, X } from 'lucide-react';
 import InteractivePrioritizer from '../components/InteractivePrioritizer';
 import ADHDSelfCheck from '../components/ADHDSelfCheck';
+import { TimerIllustration, TaskPrioritization } from '../components/AnimatedIllustrations';
 
 const ToolsPage: React.FC = () => {
   // Modal States
@@ -118,9 +119,17 @@ const ToolsPage: React.FC = () => {
               </div>
               
               <div className="mb-6">
-                <p className="text-neutral-600 mb-4">
-                  The Pomodoro Technique helps you focus for short periods with regular breaks. Great for ADHD brains!
-                </p>
+                <div className="flex flex-col md:flex-row gap-6 mb-4">
+                  <div className="md:w-1/2">
+                    <p className="text-neutral-600 mb-4">
+                      The Pomodoro Technique helps you focus for short periods with regular breaks. Great for ADHD brains!
+                    </p>
+                    <TimerIllustration className="h-40 w-full md:hidden" />
+                  </div>
+                  <div className="md:w-1/2 hidden md:block">
+                    <TimerIllustration className="h-full w-full" />
+                  </div>
+                </div>
                 
                 <div className="bg-neutral-100 p-6 rounded-lg text-center mb-6">
                   <div className="text-4xl font-bold mb-2">
@@ -241,9 +250,17 @@ const ToolsPage: React.FC = () => {
               </div>
               
               <div>
-                <p className="text-neutral-600 mb-6">
-                  A simple framework to help you decide what to focus on when everything feels important.
-                </p>
+                <div className="flex flex-col md:flex-row gap-6 mb-6">
+                  <div className="md:w-1/2">
+                    <p className="text-neutral-600 mb-4">
+                      A simple framework to help you decide what to focus on when everything feels important.
+                    </p>
+                    <TaskPrioritization className="h-40 w-full md:hidden" />
+                  </div>
+                  <div className="md:w-1/2 hidden md:block">
+                    <TaskPrioritization className="h-full w-full" />
+                  </div>
+                </div>
                 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="bg-green-50 p-4 rounded-lg">

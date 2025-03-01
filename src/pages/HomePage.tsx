@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, Brain, Clock, Award, ArrowRight } from 'lucide-react';
+import { BrainWaves, BrainNetwork, FocusCircles } from '../components/AnimatedIllustrations';
 
 const HomePage: React.FC = () => {
   return (
@@ -24,6 +25,9 @@ const HomePage: React.FC = () => {
         </div>
         
         <div className="section relative z-10 flex flex-col items-center text-center py-20 md:py-32">
+          <div className="absolute inset-x-0 top-0 h-24">
+            <BrainWaves className="w-full h-24" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -51,9 +55,12 @@ const HomePage: React.FC = () => {
       <section className="section">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">What You'll Find Here</h2>
-          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 max-w-2xl mx-auto mb-6">
             Our platform is designed to provide you with the resources, tools, and knowledge to better understand and manage ADHD.
           </p>
+          <div className="max-w-md mx-auto">
+            <BrainNetwork className="w-full h-40" />
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -157,12 +164,21 @@ const HomePage: React.FC = () => {
               Start Learning
             </Link>
           </div>
-          <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" 
-              alt="People learning together" 
-              className="rounded-xl shadow-lg object-cover h-full"
-            />
+          <div className="relative flex flex-col justify-center">
+            <div className="mb-4 md:hidden">
+              <FocusCircles className="w-full h-40" />
+            </div>
+            <div className="relative rounded-xl shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" 
+                alt="People learning together" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              <div className="absolute top-4 right-4 hidden md:block">
+                <FocusCircles className="w-32 h-32" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
