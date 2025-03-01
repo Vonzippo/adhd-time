@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, CheckSquare, Bell, ArrowRight, Play, Pause, RefreshCw } from 'lucide-react';
+import { Clock, CheckSquare, Bell, ArrowRight, Play, Pause, RefreshCw, X } from 'lucide-react';
+import InteractivePrioritizer from '../components/InteractivePrioritizer';
+import ADHDSelfCheck from '../components/ADHDSelfCheck';
 
 const ToolsPage: React.FC = () => {
+  // Modal States
+  const [showPrioritizer, setShowPrioritizer] = useState(false);
+  const [showSelfCheck, setShowSelfCheck] = useState(false);
+  
   // Pomodoro Timer State
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
@@ -261,9 +267,31 @@ const ToolsPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <button className="w-full btn btn-outline flex items-center justify-center">
+                <button 
+                  onClick={() => setShowPrioritizer(true)}
+                  className="w-full btn btn-outline flex items-center justify-center"
+                >
                   Try Interactive Prioritizer <ArrowRight className="ml-2 h-4 w-4" />
                 </button>
+                
+                {showPrioritizer && (
+                  <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-xl shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                      <div className="p-4 border-b border-neutral-200 flex justify-between items-center">
+                        <h3 className="text-xl font-bold">Interactive Task Prioritizer</h3>
+                        <button 
+                          onClick={() => setShowPrioritizer(false)}
+                          className="text-neutral-500 hover:text-neutral-700"
+                        >
+                          <X className="h-6 w-6" />
+                        </button>
+                      </div>
+                      <div className="p-4">
+                        <InteractivePrioritizer />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
             
@@ -330,9 +358,31 @@ const ToolsPage: React.FC = () => {
                   </div>
                 </div>
                 
-                <button className="w-full btn btn-outline flex items-center justify-center">
+                <button 
+                  onClick={() => setShowSelfCheck(true)}
+                  className="w-full btn btn-outline flex items-center justify-center"
+                >
                   Take Full Assessment <ArrowRight className="ml-2 h-4 w-4" />
                 </button>
+                
+                {showSelfCheck && (
+                  <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-xl shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                      <div className="p-4 border-b border-neutral-200 flex justify-between items-center">
+                        <h3 className="text-xl font-bold">ADHD Self-Assessment</h3>
+                        <button 
+                          onClick={() => setShowSelfCheck(false)}
+                          className="text-neutral-500 hover:text-neutral-700"
+                        >
+                          <X className="h-6 w-6" />
+                        </button>
+                      </div>
+                      <div className="p-4">
+                        <ADHDSelfCheck />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
@@ -396,6 +446,13 @@ const ToolsPage: React.FC = () => {
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-4">Recommended Apps</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="border border-neutral-200 rounded-lg p-4 bg-primary-50">
+                  <h4 className="font-medium mb-2">DailyRoutine</h4>
+                  <p className="text-sm text-neutral-600">
+                    Our app designed specifically for ADHD individuals to establish and maintain daily routines.
+                  </p>
+                </div>
+                
                 <div className="border border-neutral-200 rounded-lg p-4">
                   <h4 className="font-medium mb-2">Forest</h4>
                   <p className="text-sm text-neutral-600">
@@ -416,13 +473,6 @@ const ToolsPage: React.FC = () => {
                     All-in-one workspace for notes, tasks, wikis, and databases.
                   </p>
                 </div>
-                
-                <div className="border border-neutral-200 rounded-lg p-4">
-                  <h4 className="font-medium mb-2">Focus@Will</h4>
-                  <p className="text-sm text-neutral-600">
-                    Scientifically optimized music to help you focus and reduce distractions.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -432,24 +482,24 @@ const ToolsPage: React.FC = () => {
               <h3 className="text-xl font-semibold mb-4">Printable Resources</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:border-primary-300 transition-colors">
-                  <span>ADHD-Friendly Daily Planner</span>
-                  <button className="text-primary-600 hover:text-primary-700 font-medium">
+                  <span>ADHD-Friendly Planner - Daily & Weekly Planning Templates</span>
+                  <a href="/Ressources/ADHD Planner.pdf" download="ADHD-Friendly Planner.pdf" className="text-primary-600 hover:text-primary-700 font-medium">
                     Download PDF
-                  </button>
+                  </a>
                 </div>
                 
                 <div className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:border-primary-300 transition-colors">
-                  <span>Task Breakdown Worksheet</span>
-                  <button className="text-primary-600 hover:text-primary-700 font-medium">
+                  <span>ADHD Cleaning Guide - Step-by-Step Cleaning System</span>
+                  <a href="/Ressources/ADHD CLEANING.pdf" download="ADHD Cleaning Guide.pdf" className="text-primary-600 hover:text-primary-700 font-medium">
                     Download PDF
-                  </button>
+                  </a>
                 </div>
                 
                 <div className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:border-primary-300 transition-colors">
-                  <span>Emotional Regulation Strategies</span>
-                  <button className="text-primary-600 hover:text-primary-700 font-medium">
+                  <span>Tree of Growth Workbook - Personal Development Exercises</span>
+                  <a href="/Ressources/Tree of Growth Workbook.pdf" download="Tree of Growth Workbook.pdf" className="text-primary-600 hover:text-primary-700 font-medium">
                     Download PDF
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

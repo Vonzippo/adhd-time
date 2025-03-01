@@ -16,8 +16,8 @@ const Footer: React.FC = () => {
               Discover, Learn, and Engage – Your interactive space for ADHD insights
             </p>
             <div className="mt-6 flex space-x-4">
-              <a href="#" className="text-neutral-500 hover:text-primary-600">
-                <span className="sr-only">Instagram</span>
+              <a href="https://de.pinterest.com/OetterliappsEtsy/" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-primary-600">
+                <span className="sr-only">Pinterest</span>
                 <Instagram className="h-5 w-5" />
               </a>
               <a href="#" className="text-neutral-500 hover:text-primary-600">
@@ -27,6 +27,11 @@ const Footer: React.FC = () => {
               <a href="#" className="text-neutral-500 hover:text-primary-600">
                 <span className="sr-only">Facebook</span>
                 <Facebook className="h-5 w-5" />
+              </a>
+            </div>
+            <div className="mt-4">
+              <a href="https://www.etsy.com/shop/ADHDTime" target="_blank" rel="noopener noreferrer" className="text-sm text-primary-600 hover:text-primary-700">
+                Support us on Etsy
               </a>
             </div>
           </div>

@@ -1,83 +1,35 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Award, CheckCircle, ArrowRight } from 'lucide-react';
+import { BookOpen, Award, CheckCircle, ArrowRight, Brain, X } from 'lucide-react';
+import LearningModule from '../components/LearningModule';
+import { moduleData, DetailedModule } from '../data/moduleContent';
 
-interface LearningModule {
+interface ModuleStatus {
   id: string;
-  title: string;
-  description: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
-  duration: string;
   completed: boolean;
-  image: string;
 }
 
 const LearningPage: React.FC = () => {
-  const [modules, setModules] = useState<LearningModule[]>([
-    {
-      id: 'module-1',
-      title: 'Understanding ADHD: Myths vs. Facts',
-      description: 'Learn to distinguish common misconceptions from scientific facts about ADHD.',
-      difficulty: 'Beginner',
-      duration: '15 min',
-      completed: false,
-      image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-    },
-    {
-      id: 'module-2',
-      title: 'ADHD and Executive Functions',
-      description: 'Explore how ADHD affects executive functions and strategies to improve them.',
-      difficulty: 'Intermediate',
-      duration: '20 min',
-      completed: false,
-      image: 'https://images.unsplash.com/photo-1551847677-dc82d764e1eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-    },
-    {
-      id: 'module-3',
-      title: 'Emotional Regulation with ADHD',
-      description: 'Discover techniques to manage emotional responses and reduce emotional reactivity.',
-      difficulty: 'Intermediate',
-      duration: '25 min',
-      completed: false,
-      image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-    },
-    {
-      id: 'module-4',
-      title: 'ADHD in the Workplace',
-      description: 'Learn strategies for thriving at work with ADHD and requesting accommodations.',
-      difficulty: 'Advanced',
-      duration: '30 min',
-      completed: false,
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80'
-    },
-    {
-      id: 'module-5',
-      title: 'Medication and Treatment Options',
-      description: 'Understand different treatment approaches and how to work with healthcare providers.',
-      difficulty: 'Intermediate',
-      duration: '20 min',
-      completed: false,
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
-    },
-    {
-      id: 'module-6',
-      title: 'ADHD and Relationships',
-      description: 'Explore how ADHD affects relationships and communication strategies that help.',
-      difficulty: 'Advanced',
-      duration: '25 min',
-      completed: false,
-      image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80'
-    }
-  ]);
+  const [moduleStatuses, setModuleStatuses] = useState<ModuleStatus[]>(
+    moduleData.map(module => ({ id: module.id, completed: false }))
+  );
+  
+  const [activeModule, setActiveModule] = useState<DetailedModule | null>(null);
 
   const toggleCompleted = (id: string) => {
-    setModules(modules.map(module => 
-      module.id === id ? { ...module, completed: !module.completed } : module
+    setModuleStatuses(moduleStatuses.map(status => 
+      status.id === id ? { ...status, completed: !status.completed } : status
     ));
   };
 
-  const completedCount = modules.filter(module => module.completed).length;
-  const progressPercentage = (completedCount / modules.length) * 100;
+  const handleModuleComplete = () => {
+    if (activeModule) {
+      toggleCompleted(activeModule.id);
+    }
+  };
+
+  const completedCount = moduleStatuses.filter(status => status.completed).length;
+  const progressPercentage = (completedCount / moduleStatuses.length) * 100;
 
   return (
     <div>
@@ -111,7 +63,7 @@ const LearningPage: React.FC = () => {
             </div>
             <div className="w-full md:w-1/3">
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium">{completedCount} of {modules.length} completed</span>
+                <span className="text-sm font-medium">{completedCount} of {moduleStatuses.length} completed</span>
                 <span className="text-sm font-medium">{Math.round(progressPercentage)}%</span>
               </div>
               <div className="w-full bg-neutral-200 rounded-full h-2.5">
@@ -131,55 +83,63 @@ const LearningPage: React.FC = () => {
           <h2 className="text-2xl font-bold mb-8">Learning Modules</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {modules.map((module) => (
-              <motion.div 
-                key={module.id}
-                className="card overflow-hidden flex flex-col"
-                whileHover={{ y: -5 }}
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={module.image} 
-                    alt={module.title} 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      module.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
-                      module.difficulty === 'Intermediate' ? 'bg-blue-100 text-blue-800' :
-                      'bg-purple-100 text-purple-800'
-                    }`}>
-                      {module.difficulty}
-                    </span>
+            {moduleData.map((module) => {
+              const status = moduleStatuses.find(s => s.id === module.id);
+              const isCompleted = status ? status.completed : false;
+              
+              return (
+                <motion.div 
+                  key={module.id}
+                  className="card overflow-hidden flex flex-col"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={module.sections[0].imageUrl || "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"} 
+                      alt={module.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        module.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
+                        module.difficulty === 'Intermediate' ? 'bg-blue-100 text-blue-800' :
+                        'bg-purple-100 text-purple-800'
+                      }`}>
+                        {module.difficulty}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="p-6 flex-grow">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-semibold">{module.title}</h3>
+                  
+                  <div className="p-6 flex-grow">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl font-semibold">{module.title}</h3>
+                      <button 
+                        onClick={() => toggleCompleted(module.id)}
+                        className={`rounded-full p-1 ${
+                          isCompleted ? 'bg-green-100 text-green-600' : 'bg-neutral-100 text-neutral-400'
+                        }`}
+                      >
+                        <CheckCircle className="h-5 w-5" />
+                      </button>
+                    </div>
+                    <p className="text-neutral-600 mb-4">{module.description}</p>
+                    <div className="flex items-center text-sm text-neutral-500 mb-4">
+                      <BookOpen className="h-4 w-4 mr-1" />
+                      <span>{module.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="px-6 pb-6 mt-auto">
                     <button 
-                      onClick={() => toggleCompleted(module.id)}
-                      className={`rounded-full p-1 ${
-                        module.completed ? 'bg-green-100 text-green-600' : 'bg-neutral-100 text-neutral-400'
-                      }`}
+                      onClick={() => setActiveModule(module)}
+                      className="w-full btn btn-outline flex items-center justify-center"
                     >
-                      <CheckCircle className="h-5 w-5" />
+                      Start Module <ArrowRight className="ml-2 h-4 w-4" />
                     </button>
                   </div>
-                  <p className="text-neutral-600 mb-4">{module.description}</p>
-                  <div className="flex items-center text-sm text-neutral-500 mb-4">
-                    <BookOpen className="h-4 w-4 mr-1" />
-                    <span>{module.duration}</span>
-                  </div>
-                </div>
-                
-                <div className="px-6 pb-6 mt-auto">
-                  <button className="w-full btn btn-outline flex items-center justify-center">
-                    Start Module <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -250,6 +210,25 @@ const LearningPage: React.FC = () => {
           </div>
         </div>
       </section>
+      
+      {/* Active Module */}
+      {activeModule && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="max-w-4xl w-full">
+            <LearningModule
+              id={activeModule.id}
+              title={activeModule.title}
+              description={activeModule.description}
+              difficulty={activeModule.difficulty}
+              duration={activeModule.duration}
+              sections={activeModule.sections}
+              quiz={activeModule.quiz}
+              onComplete={handleModuleComplete}
+              onClose={() => setActiveModule(null)}
+            />
+          </div>
+        </div>
+      )}
       
       {/* CTA Section */}
       <section className="bg-primary-600 py-16">
