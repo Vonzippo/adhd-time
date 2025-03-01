@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center">
               <Brain className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-xl font-semibold text-neutral-900">ADHD Platform</span>
+              <span className="ml-2 text-xl font-semibold text-neutral-900">ADHDTime</span>
             </div>
             <p className="mt-4 text-sm text-neutral-600 max-w-xs">
               Discover, Learn, and Engage – Your interactive space for ADHD insights
@@ -103,7 +103,7 @@ const Footer: React.FC = () => {
         
         <div className="mt-12 border-t border-neutral-200 pt-8">
           <p className="text-sm text-neutral-500 text-center">
-            &copy; {new Date().getFullYear()} ADHD Interactive Platform. All rights reserved.
+            &copy; {new Date().getFullYear()} ADHDTime. All rights reserved.
           </p>
         </div>
       </div>

@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <Brain className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-xl font-semibold text-neutral-900">ADHD Platform</span>
+              <span className="ml-2 text-xl font-semibold text-neutral-900">ADHDTime</span>
             </Link>
           </div>
           

@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-neutral-900">
-              ADHD Interactive Platform
+              ADHDTime
             </h1>
             <p className="text-xl md:text-2xl text-neutral-700 max-w-3xl mx-auto mb-10">
               Discover, Learn, and Engage – Your interactive space for ADHD insights
